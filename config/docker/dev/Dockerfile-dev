@@ -27,6 +27,16 @@ WORKDIR $APP_HOME
 
 ADD . $APP_HOME
 
+
+# Umbrella
+COPY mix.exs mix.lock ./
+COPY config config
+
+# Apps
+COPY apps apps
+RUN mix do local.hex --force, local.rebar --force
+RUN mix do deps.get, deps.compile
+
 #Install git
 RUN apt-get update \
     && apt-get install -y git
@@ -41,8 +51,8 @@ RUN apt-get clean \
   && apt-get install -y nodejs yarn
 
 # Umbrella
-COPY mix.exs mix.lock $HOME/
-COPY config $HOME/cconfig
+COPY mix.exs mix.lock ./
+COPY config config
 
 # Apps
 COPY apps apps
