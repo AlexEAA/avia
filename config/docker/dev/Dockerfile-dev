@@ -41,8 +41,8 @@ RUN apt-get clean \
   && apt-get install -y nodejs yarn
 
 # Umbrella
-COPY mix.exs mix.lock ./
-COPY config config
+COPY mix.exs mix.lock $HOME/
+COPY config $HOME/cconfig
 
 # Apps
 COPY apps apps
