@@ -1,6 +1,6 @@
 FROM elixir:1.7.3-slim as builder
 
-# Before running following commands, configure
+# Before running following command
 # 1. 'env/local.env' file.
 # 2. `/apps/snitch_core/config/dev.exs' file
 
@@ -41,8 +41,8 @@ RUN apt-get clean \
   && apt-get install -y nodejs yarn
 
 # Umbrella
-COPY mix.exs mix.lock ./
-COPY config config
+COPY mix.exs mix.lock $HOME/
+COPY config $HOME/cconfig
 
 # Apps
 COPY apps apps
